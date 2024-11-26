@@ -23,14 +23,14 @@ DATA_DIR = BASE_DIR.parent / 'data' / 'web'
 # override = overwrites a variable IN THIS file
 #  if one with the same name is found in the .env file
 
-load_dotenv(BASE_DIR.parent / 'dotenv_files' / '.env', override=True)
+load_dotenv(BASE_DIR.parent / 'env_files' / '.env', override=True)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', 'change-me')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.getenv('DEBUG', 1)))
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
     'axes',
 ]
 
@@ -70,7 +71,7 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +79,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'site_setup.context_processors.cont_processor_example',
-                'site_setup.context_processors.site_setup'
             ],
         },
     },
@@ -93,12 +92,12 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE', 'change-me'),
-        'NAME': os.getenv('POSTGRES_DB', 'change-me'),
-        'USER': os.getenv('POSTGRES_USER', 'change-me'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'change-me'),
-        'HOST': os.getenv('POSTGRES_HOST', 'change-me'),
-        'PORT': os.getenv('POSTGRES_PORT', 'change-me'),
+        'ENGINE': os.getenv('DB_ENGINE',),
+        'NAME': os.getenv('POSTGRES_DB',),
+        'USER': os.getenv('POSTGRES_USER',),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD',),
+        'HOST': os.getenv('POSTGRES_HOST',),
+        'PORT': os.getenv('POSTGRES_PORT',),
     }
 }
 
